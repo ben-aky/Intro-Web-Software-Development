@@ -1,0 +1,48 @@
+<html>
+<h1>Vending Machine</h1>
+
+<img src="https://darkroom.contagious.com/1380/e482d65fcf7c8903d2c1f0655387005c:78916762a75fac6fbb66379ce20e11d7/113.jpg" width="300" height="200" id="item1">
+<button onclick="buyItem(1, 1.5)">$1.50</button>
+
+<img src="https://s7d2.scene7.com/is/image/hersheysassets/0_34000_00240_5_701_24000_097_Item_Front?fmt=webp-alpha&hei=908&qlt=75" width="200" height="200" id="item2">
+<button onclick="buyItem(2, 1)">$1.00</button>
+
+<img src="https://images.cdn.retail.brookshires.com/detail/e7c56f9b-118a-4082-8bea-eb3658bd0d41.jpeg" width="200" height="200" id="item3">
+<button onclick="buyItem(3, 0.75)">$0.75</button>
+<br>
+
+<img id="outputImage" src="" width="130" height="130">
+<br>
+<button onclick="insertMoney()">Drop in $1</button>
+
+<br>
+Total of money inserted: <input type="text" id="totalMoney" value="0">
+<br>
+Change return: <input type="text" id="changeReturn" value="">
+<br>
+<input type="text" id="errorMessage" style="color:red" size="25">
+
+
+
+<script>
+total = 0;
+function insertMoney() {
+total = total + 1;
+document.getElementById("totalMoney").value = total;
+document.getElementById("errorMessage").value = "";
+}
+function buyItem(n, price) {
+if (total >= price) {
+document.getElementById("outputImage").src = document.getElementById("item" + n).src;
+document.getElementById("changeReturn").value = (total - price);
+total = 0;
+document.getElementById("totalMoney").value = "0";
+document.getElementById("errorMessage").value = "";
+} else {
+document.getElementById("errorMessage").value = "Please deposit more money";
+document.getElementById("outputImage").src = "";
+document.getElementById("changeReturn").value = "";
+}
+}
+</script>
+</html>

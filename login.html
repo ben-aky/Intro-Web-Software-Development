@@ -1,0 +1,37 @@
+<html>
+<h1>Log-in</h1>
+<table border="1">
+<tr><td>Enter your user ID:
+<td><input type="text" id="user">
+<tr><td>Enter your password: 
+<td><input type="password" id="pass">
+<tr><td><button onclick="logIn()">Log-in</button>
+</table>
+<br>
+<input type="text" id="output">
+
+
+<script>
+function logIn() {
+user = document.getElementById("user").value;
+pass = document.getElementById("pass").value;
+usernames = ["test", "ben", "user3"];
+passwords = ["test1", "ben123", "pass3"];
+for (i=0; i<usernames.length; i=i+1) {
+      if (user == usernames[i]) { 
+      if (pass == passwords[i]) {
+        document.getElementById("output").value = "Log-in succesful";
+        return;
+      }
+      else {
+        document.getElementById("output").value = "Invalid password";
+        return;
+      }
+  } 
+  else {
+      document.getElementById("output").value = "Invalid username";
+}
+}
+} 
+</script>
+</html>

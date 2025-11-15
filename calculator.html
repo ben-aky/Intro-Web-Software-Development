@@ -1,0 +1,42 @@
+<html>
+<h2>Simple Four Function Calculator</h2>
+<form name="cal" onsubmit="return false;">
+Input arg 1: <input type="text" name="arg1">
+<br>
+Input arg 2: <input type="text" name="arg2">
+<br>
+<br>
+<button onclick="add()">+</button>
+<button onclick="sub()">-</button>
+<button onclick="mult()">*</button>
+<button onclick="div()">/</button>
+<br>
+<br>
+Output: <input type="text" name="final" style="width:182px;">
+</form>
+
+<script>
+function add() {
+	arg1= Number(document.cal.arg1.value);
+	arg2= Number(document.cal.arg2.value);
+	document.cal.final.value= arg1+arg2;
+	}
+function sub() {
+	arg1= Number(document.cal.arg1.value);
+	arg2= Number(document.cal.arg2.value);
+	document.cal.final.value= arg1-arg2;
+	}
+function mult() {
+	arg1= Number(document.cal.arg1.value);
+	arg2= Number(document.cal.arg2.value);
+	document.cal.final.value= arg1*arg2;
+	}
+function div() {
+	arg1= Number(document.cal.arg1.value);
+	arg2= Number(document.cal.arg2.value);
+	if (arg2==0) document.cal.final.value= "Error: You cannot divide by 0!";
+	else document.cal.final.value= arg1/arg2;
+	}
+</script>
+
+</html>

@@ -1,0 +1,78 @@
+<html>
+<h1>Blackjack</h1>
+Dealer's Cards: <input type = "text" id = "dCards">
+<br>
+Dealer's Total: <input type = "text" id = "dTotal">
+<br>
+
+Your Cards: <input type = "text" id = "uCards">
+<br>
+Your Total: <input type = "text" id = "uTotal">
+<br>
+
+<button onclick = "hitMe()">Hit Me</button>
+<button onclick = "hitDealer()">Hit the Dealer</button>
+<button onclick = "newDeal()">Start New Deal</button>
+
+<br>
+<input type = "text" id = "output">
+
+<script>
+userHand = [];
+dealerHand = [];
+userPts = 0;
+dealerPts = 0; 
+
+cardNames = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+cardPts = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11];
+
+function newDeal() {
+document.getElementById("output").value = "";
+userPts = 0;
+dealerPts = 0;
+userHand = [uDrawCard(), uDrawCard()];
+dealerHand = [dDrawCard()];
+displayHands();
+}
+
+function uDrawCard() {
+i = Math.floor(Math.random() * 13);
+userPts = userPts + cardPts[i];
+return cardNames[i];
+} 
+
+function dDrawCard() {
+i = Math.floor(Math.random() * 13);
+dealerPts = dealerPts + cardPts[i];
+return cardNames[i];
+} 
+
+function hitMe() {
+userHand.push(uDrawCard());
+displayHands();
+checkBustWin();
+}
+
+function hitDealer() {
+dealerHand.push(dDrawCard());
+displayHands();
+checkBustWin();
+}
+
+function displayHands() {
+document.getElementById("uCards").value = userHand;
+document.getElementById("dCards").value = dealerHand;
+document.getElementById("uTotal").value = userPts;
+document.getElementById("dTotal").value = dealerPts;
+}
+
+function checkBustWin() {
+if (dealerPts > 21) {
+document.getElementById("output").value = "Dealer busts, you win!";
+} else if (userPts > 21) {
+document.getElementById("output").value = "You bust, dealer wins!";
+}
+}
+newDeal();
+</script>
+</html>

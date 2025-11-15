@@ -1,0 +1,56 @@
+<html>
+
+<h1>Translate to Pig Latin</h1>
+<table>
+<tr><td>Enter your word in English:
+<td><input type="text" id="english">
+<tr><td>Pig-Latin translation:
+<td><input type="text" id="output">
+<tr><td><button onclick="translate()">Translate</button>
+</table>
+
+
+<script>
+function translate() {
+input = document.getElementById("english").value;
+vowels = "aeiou"
+output = "";
+for (i = 0; i < input.length; i=i+1) {
+ word = input[i];
+ vowelIndex = -1;
+ prefix = "";
+ suffix = "";
+ for (j = 0; j < word.length; j=j+1) {
+   isVowel = false;
+   for (k = 0; k < vowels.length; k=k+1) {
+    if (word[j] == vowels[k]) {
+     isVowel = true;
+     break;
+}
+}
+   if (isVowel) {
+    vowelIndex = j;
+    break;
+}
+}
+  if (vowelIndex === 0) {
+   output += word + "way";
+  } else if (vowelIndex > 0) {
+  for (j = vowelIndex; j < word.length; j=j+1) {
+   suffix += word[j];
+}
+  for (j = 0; j < vowelIndex; j=j+1) {
+   prefix += word[j];
+}
+  output += suffix + prefix + "ay";
+  } else {
+  output += word;
+}
+  if (i < words.length - 1) {
+   output += " ";
+}
+}
+document.getElementById("output").value = output;
+} 
+</script>
+</html>

@@ -1,0 +1,57 @@
+<html>
+<h1>Vote for Your Favorite Pet</h1>
+<table border="1">
+<tr><td><img src="https://d2zp5xs5cp8zlg.cloudfront.net/image-79322-800.jpg" width="100">
+<td><img src="https://cdn.shopify.com/s/files/1/0255/7424/4445/files/image3_480x480.jpg" width="100">
+<td><input type="text" id="writeInName" placeholder="Write-in Name">
+<tr><td>Cats
+<td>Dogs
+<td>Write-in
+<tr><td><button onclick="voteCats()">Vote</button>
+<td><button onclick="voteDogs()">Vote</button>
+<td><button onclick="voteWriteIn()">Vote</button>
+</table>
+<h1>Results</h1>
+<textarea rows="3" cols="15" id="results"> </textarea>
+<br>
+Current Leader: <input type="text" id="leader">
+
+
+<script>
+votesCats = 0;
+votesDogs = 0;
+votesWriteIn = 0;
+
+function voteCats() {
+votesCats = votesCats + 1;
+displayResults();
+}
+
+function voteDogs() {
+votesDogs = votesDogs + 1;
+displayResults();
+}
+
+function voteWriteIn() {
+writeInName = document.getElementById("writeInName").value;
+votesWriteIn = votesWriteIn + 1;
+displayResults();
+}
+
+function displayResults() {
+resultsText= "Cats: " + votesCats + " votes \nDogs: " + votesDogs + " votes \n" + writeInName + ": " + votesWriteIn + " votes";
+document.getElementById("results").value = resultsText;
+leader = "No votes";
+maxVotes = Math.max(votesCats, votesDogs, votesWriteIn);
+if (maxVotes === votesCats) {
+leader = "Cats";
+} else if (maxVotes === votesDogs) {
+leader = "Dogs";
+} else if (maxVotes === votesWriteIn) {
+leader = writeInName;
+}
+document.getElementById("leader").value = leader;
+}
+</script>
+
+</html>

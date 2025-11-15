@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simplified Blackjack</title>
+</head>
+<body>
+  <h1>Simplified Blackjack</h1>
+
+  <div class="section">
+    <div><strong>Dealer's Cards:</strong> <span id="dealerCards" class="cards"></span></div>
+    <div><strong>Dealer's Total:</strong> <span id="dealerTotal">0</span></div>
+  </div>
+
+  <div class="section">
+    <div><strong>Your Cards:</strong> <span id="playerCards" class="cards"></span></div>
+    <div><strong>Your Total:</strong> <span id="playerTotal">0</span></div>
+  </div>
+
+  <div class="section">
+    <button onclick="hitMe()">Hit Me</button>
+    <button onclick="hitDealer()">Hit the Dealer</button>
+    <button onclick="newDeal()">New Deal</button>
+  </div>
+
+  <div class="section">
+    <strong id="message"></strong>
+  </div>
+
+  <script>
+    const cardNames = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+    const cardPoints = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10];
+
+    let playerHand = [];
+    let dealerHand = [];
+
+    function drawCard() {
+      const index = Math.floor(Math.random() * 13);
+      return { name: cardNames[index], value: cardPoints[index] };
+    }
+
+    function calculateTotal(hand) {
+      return hand.reduce((sum, card) => sum + card.value, 0);
+    }
+
+    function displayHands() {
+      document.getElementById("playerCards").innerText = playerHand.map(c => c.name).join(" ");
+      document.getElementById("playerTotal").innerText = calculateTotal(playerHand);
+      document.getElementById("dealerCards").innerText = dealerHand.map(c => c.name).join(" ");
+      document.getElementById("dealerTotal").innerText = calculateTotal(dealerHand);
+    }
+
+    function checkPlayerBust() {
+      const total = calculateTotal(playerHand);
+      if (total > 21) {
+        document.getElementById("message").innerText = "You busted! Dealer wins.";
+        return true;
+      }
+      return false;
+    }
+
+    function checkDealerBustOrWinner() {
+      const playerTotal = calculateTotal(playerHand);
+      const dealerTotal = calculateTotal(dealerHand);
+
+      if (dealerTotal > 21) {
+        document.getElementById("message").innerText = "Dealer busted! You win!";
+      } else if (dealerTotal >= 17) {
+        if (dealerTotal > playerTotal) {
+          document.getElementById("message").innerText = "Dealer wins!";
+        } else if (dealerTotal < playerTotal) {
+          document.getElementById("message").innerText = "You win!";
+        } else {
+          document.getElementById("message").innerText = "It's a tie!";
+        }
+      }
+    }
+
+    function hitMe() {
+      if (calculateTotal(playerHand) >= 21) return;
+      playerHand.push(drawCard());
+      displayHands();
+      checkPlayerBust();
+    }
+
+    function hitDealer() {
+      if (calculateTotal(dealerHand) >= 17) return;
+      dealerHand.push(drawCard());
+      displayHands();
+      checkDealerBustOrWinner();
+    }
+
+    function newDeal() {
+      playerHand = [drawCard(), drawCard()];
+      dealerHand = [drawCard()];
+      document.getElementById("message").innerText = "";
+      displayHands();
+    }
+
+    // Start with a new deal on load
+    newDeal();
+  </script>
+</body>
+</html>

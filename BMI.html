@@ -1,0 +1,32 @@
+<html>
+<h2>Calculate your body mass index!</h2>
+<form name="bmical" onsubmit="calculateBMI(); return false;">
+Input your height (in.): <input type="text" name="height">
+<br>
+Input your weight (lbs): <input type="text" name="weight">
+<br>
+<input type="submit">
+<br>
+<br>
+<h3>Findings:</h3>
+Your BMI score is: <input type="text" name="bmi">
+<br>
+You are: <input type="text" name="bmicat">
+</form>
+
+<script>
+function calculateBMI() {
+	height= document.bmical.height.value;
+	weight= document.bmical.weight.value;
+	bmi= (weight/(height*height))*703;
+	document.bmical.bmi.value= bmi;
+	var bmicat= "";
+	if (bmi < 18.5) bmicat= "Underweight";
+	else if (bmi < 24.9) bmicat= "Normal weight";
+	else if (bmi < 29.9) bmicat= "Overweight";
+	else bmicat= "Obese";
+	document.bmical.bmicat.value= bmicat;
+	}
+</script>
+
+</html>

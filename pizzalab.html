@@ -1,0 +1,55 @@
+<html>
+<h1>Pizza Toppings</h1>
+
+<select id="left" size="6">
+<option>Cheese</option>
+<option>Pepperoni</option>
+<option>Sausage</option>
+<option>Mushrooms</option>
+<option>Onions</option>
+<option>Peppers</option>
+</select>
+
+<input type="button" value="Select" onclick="selectItem()">
+<input type="button" value="Remove" onclick="removeItem()">
+<input type="button" value="Fax Order" onclick="faxOrder()">
+
+<select id="right" size="6"></select>
+
+<script>
+function selectItem() {
+left = document.getElementById("left")
+right = document.getElementById("right")
+index = left.selectedIndex
+if (index > -1) {
+text = left.options[index].text
+option = new Option(text)
+right.options.add(option)
+left.remove(index)
+}
+}
+
+function removeItem() {
+left = document.getElementById("left")
+right = document.getElementById("right")
+index = right.selectedIndex
+if (index > -1) {
+text = right.options[index].text
+option = new Option(text)
+left.options.add(option)
+right.remove(index)
+}
+}
+
+function faxOrder() {
+right = document.getElementById("right")
+message = "Fax Order:\n"
+i = 0
+while (i < right.options.length) {
+message = message + right.options[i].text + "\n"
+i = i + 1
+}
+alert(message)
+}
+</script>
+</html>
